@@ -1,26 +1,137 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* CRAM brand palette — taken from the four-colour ring of the official logo */
+  --color-navy: #1c2541; /* ink: the logo's dark "TUTORIAL CENTER" lettering */
+  --color-navy-deep: #131a30;
+  --color-royal: #1d6fd6; /* CRAM blue  — Inclusivity */
+  --color-royal-dark: #1659ad;
+  --color-sky: #5ab8f5;
+  --color-accent: #fbbf24; /* CRAM yellow — Independence */
+  --color-accent-light: #fcd34d;
+  --color-cram-red: #e63946; /* CRAM red — Improvement */
+  --color-cram-red-dark: #c1272f;
+  --color-cram-green: #2fb463; /* CRAM green — Care */
+  --color-cram-green-dark: #1e8a48;
+  --color-surface: #fff8ec; /* warm paper background */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Typography: Inter for reading, Fredoka (rounded, like the CRAM logo) for headings */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fredoka), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+}
+
+/* One container width for the entire page */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 76rem;
+  padding-inline: 1.25rem;
+  @variant sm {
+    padding-inline: 1.5rem;
+  }
+  @variant lg {
+    padding-inline: 2rem;
+  }
+}
+
+/* One vertical rhythm for every standard section */
+@utility section-y {
+  padding-block: 5rem;
+  @variant sm {
+    padding-block: 6rem;
+  }
+  @variant lg {
+    padding-block: 7rem;
+  }
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(rgb(29 111 214 / 0.16) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@utility bg-dots-light {
+  background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgb(28 37 65 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(28 37 65 / 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keeps anchored sections clear of the fixed navbar */
+  scroll-padding-top: 5.5rem;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-navy);
+  line-height: 1.6;
+}
+
+::selection {
+  background: rgb(56 189 248 / 0.3);
+}
+
+/* Scroll-reveal: only hides content when JS can reveal it and motion is welcome. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>CRAM Tutorial Center</title>
+  <!-- Four-colour CRAM ring (Improvement · Independence · Care · Inclusivity) -->
+  <g fill="none" stroke-width="14">
+    <path d="M7 32A25 25 0 0 1 32 7" stroke="#e63946"/>
+    <path d="M32 7A25 25 0 0 1 57 32" stroke="#fbbf24"/>
+    <path d="M57 32A25 25 0 0 1 32 57" stroke="#2fb463"/>
+    <path d="M32 57A25 25 0 0 1 7 32" stroke="#1d6fd6"/>
+  </g>
+  <circle cx="32" cy="32" r="18.5" fill="#ffffff"/>
+  <path d="M38.7 25.3A9.5 9.5 0 1 0 38.7 38.7" fill="none" stroke="#1c2541" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
